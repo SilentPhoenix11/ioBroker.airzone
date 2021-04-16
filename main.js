@@ -4,7 +4,7 @@
  * Created with @iobroker/create-adapter v1.33.0
  */
 
-const adaptername = "Airzone"
+const adaptername = "airzone"
 
 const utils = require('@iobroker/adapter-core');
 
