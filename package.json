@@ -1,0 +1,36 @@
+{
+   "name":"iobroker.Airzone",
+   "version":"1.1.0",
+   "description":"Airzone Cloud adapter for ioBroker",
+   "author":{
+      "name":"Schemmer Christian",
+      "email":""
+   },
+   "homepage":"https://github.com/SilentPhoenix11/ioBroker.Airzone",
+   "license":"MIT",
+   "keywords":[
+      "ioBroker",
+      "airzone",
+      "airzone cloud",
+      "Smart Home",
+      "home automation"
+   ],
+   "repository":{
+      "type":"git",
+      "url":"https://github.com/SilentPhoenix11/ioBroker.Airzone"
+   },
+   "dependencies":{
+      "@iobroker/adapter-core":"^1.0.3"
+   },
+   "devDependencies":{
+
+   },
+   "main":"main.js",
+   "scripts":{
+
+   },
+   "bugs":{
+      "url":"https://github.com/SilentPhoenix11/ioBroker.Airzone/issues"
+   },
+   "readmeFilename":"README.md"
+}

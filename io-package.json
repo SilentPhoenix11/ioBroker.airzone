@@ -1,0 +1,70 @@
+{
+   "common":{
+      "name":"Airzone",
+      "version":"0.0.1",
+      "news":{
+         "0.0.1":{
+            "en":"ioBroker adapter for Airzone Cloud",
+            "de":"ioBroker Adapter für Airzone Cloud"
+         }
+      },
+      "title":"Airzone Cloud",
+      "titleLang":{
+         "en":"Airzone Cloud ioBroker adapter",
+         "de":"Airzone Cloud ioBroker Adapter"
+      },
+      "desc":{
+         "en":"",
+         "de":""
+      },
+      "authors":[
+         ""
+      ],
+      "keywords":[
+         "ioBroker",
+         "airzone",
+         "Smart Home",
+         "home automation"
+      ],
+      "license":"MIT",
+      "platform":"Javascript/Node.js",
+      "main":"main.js",
+      "icon":"airzone.png",
+      "enabled":true,
+      "extIcon":"https://raw.githubusercontent.com/SilentPhoenix11/ioBroker.Airzone/master/admin/airzone.png",
+      "readme":"https://github.com/SilentPhoenix11/ioBroker.Airzone/blob/master/README.md",
+      "loglevel":"info",
+      "mode":"daemon",
+      "type":"general",
+      "compact":true,
+      "materialize":true,
+      "materializeTab":true,
+      "adminTab":{
+         "singleton":true,
+         "name":{
+            "en":"Airzone Cloud",
+            "de":"Airzone Cloud"
+         },
+         "link":"www.airzone.es/en/",
+         "fa-icon":"info"
+      },
+      "supportCustoms":true,
+      "dependencies":[
+         {
+            "js-controller":">=1.4.2"
+         }
+      ]
+   },
+   "native":{
+      "username":"",
+      "password":"",
+      "user_agent":"",
+      "base_url":"https://www.airzonecloud.com"
+   },
+   "objects":[
+
+   ],
+   "instanceObjects":[
+
+   ]
+}
