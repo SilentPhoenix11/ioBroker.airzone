@@ -19,6 +19,16 @@ var BASE_URL = "https://www.airzonecloud.com";	 // allow to change base url of t
 //*************************************  ADAPTER STARTS with ioBroker *******************************************
 adapter.on ('ready',function (){
     adapter.log.info("Airzone Cloud adapter started.");
+
+    // TODO: Datenpunkte erstellen
+    //adapter.setObjectNotExists (GetDMX(i),{
+    //    type:'state',
+    //    common:{name:'DMX channel'+i ,type:'number',role:'value',read:true,write:true},
+    //    native:{}
+    //});
+
+    //Enable receiving of change events for all objects
+	adapter.subscribeStates('*');
 });
 
 //************************************* ADAPTER CLOSED BY ioBroker *****************************************
