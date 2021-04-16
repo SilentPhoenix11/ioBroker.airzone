@@ -56,9 +56,6 @@
       ]
    },
    "native":{
-      "username":"",
-      "password":"",
-      "user_agent":"",
       "base_url":"https://www.airzonecloud.com"
    },
    "objects":[

@@ -2,7 +2,7 @@
 //Airzone Cloud Adapter for ioBroker
 //REV 0.0.1
 
-const adaptername = "Airzone Cloud"
+const adaptername = "Airzone"
 
 const utils = require('@iobroker/adapter-core');
 var adapter  = utils.Adapter (adaptername);
@@ -16,7 +16,17 @@ var USER_AGENT = "";							 // allow to change default user agent if set
 var BASE_URL = "https://www.airzonecloud.com";	 // allow to change base url of the Airzone Cloud API if set
 
 
+//*************************************  ADAPTER STARTS with ioBroker *******************************************
+adapter.on ('ready',function (){
+    adapter.log.info("Airzone Cloud adapter started.");
+});
 
+//************************************* ADAPTER CLOSED BY ioBroker *****************************************
+adapter.on ('unload',function (callback){
+    adapter.log.info("Airzone Cloud adapter stopped.");
+	callback;
+	});
 
-
-
+//************************************* Adapter STATE has CHANGED ******************************************	
+adapter.on ('stateChange',function (id,obj){    
+});
