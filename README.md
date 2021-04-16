@@ -1,4 +1,4 @@
-![Logo](admin/airzone.png)
+![Logo](admin/Airzone.png)
 https://airzonecloud.com/
 
 ##  Changelog
