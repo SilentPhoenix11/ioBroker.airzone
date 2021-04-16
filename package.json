@@ -1,10 +1,9 @@
 {
-   "name":"iobroker.Airzone",
+   "name":"iobroker.airzone",
    "version":"0.0.1",
-   "description":"Airzone Cloud adapter for ioBroker",
+   "description":"Airzone cloud adapter for ioBroker",
    "author":{
-      "name":"Schemmer Christian",
-      "email":""
+      "name":"Schemmer Christian"
    },
    "homepage":"https://github.com/SilentPhoenix11/ioBroker.Airzone",
    "license":"MIT",
@@ -20,7 +19,7 @@
       "url":"https://github.com/SilentPhoenix11/ioBroker.Airzone"
    },
    "dependencies":{
-      "@iobroker/adapter-core":"^1.0.3"
+      "@iobroker/adapter-core": "^2.4.0"
    },
    "devDependencies":{
 
