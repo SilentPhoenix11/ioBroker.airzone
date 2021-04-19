@@ -1,12 +1,10 @@
 'use strict';
 
-/*
- * Created with @iobroker/create-adapter v1.33.0
- */
-
 const adaptername = "airzone"
 
 const utils = require('@iobroker/adapter-core');
+const AirzoneCloud = require("./Cloud/AirzoneCloud");
+
 
 class Template extends utils.Adapter {
 
@@ -17,25 +15,22 @@ class Template extends utils.Adapter {
         super({
             ...options,
             name: adaptername,
-        });
+        });        
         this.on('ready', this.onReady.bind(this));
         this.on('stateChange', this.onStateChange.bind(this));
         // this.on('objectChange', this.onObjectChange.bind(this));
         // this.on('message', this.onMessage.bind(this));
-        this.on('unload', this.onUnload.bind(this));
+        this.on('unload', this.onUnload.bind(this));        
     }
 
     /**
      * Is called when databases are connected and adapter received configuration.
      */
+    
     async onReady() {
         // Initialize your adapter here
-
-        // The adapters config (in the instance object everything under the attribute "native") is accessible via
-        // this.config:
-        this.log.info('config base_url: ' + this.config.base_url);
-        this.log.info('config username: ' + this.config.username);
-        this.log.info('config password: ' + this.config.password);
+        this.session = new AirzoneCloud(this.log, this.config.username, this.config.password, this.config.base_url);
+        await this.session.init();
 
         /*
         For every state in the system there has to be also an object of type state

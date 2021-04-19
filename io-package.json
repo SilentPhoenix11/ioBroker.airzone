@@ -28,9 +28,9 @@
       ],
       "license":"MIT",
       "platform":"Javascript/Node.js",
-      "icon":"Airzone.png",
+      "icon":"AirzoneSmall.png",
       "enabled":true,
-      "extIcon":"https://raw.githubusercontent.com/SilentPhoenix11/ioBroker.Airzone/master/admin/Airzone.png",
+      "extIcon":"https://raw.githubusercontent.com/SilentPhoenix11/ioBroker.Airzone/master/admin/AirzoneSmall.png",
       "readme":"https://github.com/SilentPhoenix11/ioBroker.Airzone/blob/master/README.md",
       "loglevel":"info",
       "mode":"daemon",
@@ -55,7 +55,7 @@
       ]
    },
    "native":{
-      "base_url":"https://www.airzonecloud.com"
+      "base_url":"https://airzonecloud.com"
    },
    "objects":[],
    "instanceObjects":[]
