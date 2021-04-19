@@ -7,10 +7,19 @@ class System {
     {
         this.airzone = airzone;
         this.id = systemData["id"];
-        this.name = systemData["name"];   
+        this.name = systemData["name"];        
+
+        this.device_id = systemData["device_id"];   
+        this.system_number = systemData["system_number"];   
+
         this.min_temp = systemData["min_limit"];   
         this.max_temp = systemData["max_limit"];   
 
+        this.updateData(systemData);
+    }
+
+    updateData(systemData)
+    {                               
         this.has_velocity = systemData["has_velocity"];
         this.velocity_raw = systemData["velocity"];
         this.velocity = this.has_velocity ? Constants.VELOCITIES_CONVERTER[this.velocity_raw]["name"] : undefined;
@@ -38,8 +47,6 @@ class System {
     }
 
     async load_zones() {
-        this.airzone.logInfo("Load zones of systems "+this.name);
-
         var params = "/?system_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
         var url = this.airzone.base_url.concat(Constants.API_ZONES, params);
         var response = await AsyncRequest.jsonGetRequest(url);

@@ -53,7 +53,6 @@ class AirzoneCloud {
     }
 
     async load_devices() {
-        this.logInfo("Load all devices");
         var params = "/?format=json&user_email="+this.username.toLowerCase()+"&user_token="+this.token;
         var url = this.base_url.concat(Constants.API_DEVICE_RELATIONS, params);
         var response = await AsyncRequest.jsonGetRequest(url);

@@ -8,6 +8,12 @@ class Device {
         this.airzone = airzone;
         this.id = deviceData["id"];
         this.name = deviceData["name"];
+        
+        this.updateData(deviceData);
+    }
+
+    updateData(deviceData)
+    {                
         this.status = deviceData["status"];
         this.mac = deviceData["mac"];
         this.pin = deviceData["pin"];
@@ -22,8 +28,6 @@ class Device {
     }
 
     async load_systems() {
-        this.airzone.logInfo("Load systems of "+this.name);
-
         var params = "/?device_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
         var url = this.airzone.base_url.concat(Constants.API_SYSTEMS, params);
         var response = await AsyncRequest.jsonGetRequest(url);
