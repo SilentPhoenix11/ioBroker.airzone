@@ -32,6 +32,31 @@ class AsyncRequest {
 
         return JSON.parse(result);        
     }
+
+    static async jsonGetRequest(url) {
+        
+        const response = await asyncRequest({
+            method: 'GET',
+            uri: url
+        });
+
+        var result;
+        
+        if(response.error)
+        {
+            result = JSON.stringify({statusCode:response.statusCode,errors:error});
+        }
+        else
+        {
+            var errorMsg = JSON.parse(response.body)["errors"];
+            if(errorMsg)
+                result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
+            else
+                result = JSON.stringify({statusCode:response.statusCode,body:response.body});
+        }        
+
+        return JSON.parse(result);        
+    }
 }
 
 module.exports = AsyncRequest;

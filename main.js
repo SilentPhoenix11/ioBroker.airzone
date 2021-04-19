@@ -31,6 +31,8 @@ class Template extends utils.Adapter {
         // Initialize your adapter here
         this.session = new AirzoneCloud(this.log, this.config.username, this.config.password, this.config.base_url);
         await this.session.init();
+        this.log.info("................")
+        //await this.session.init();
 
         /*
         For every state in the system there has to be also an object of type state
