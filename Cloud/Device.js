@@ -28,18 +28,10 @@ class Device {
     }
 
     async load_systems() {
-        var params = "/?device_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
-        var url = this.airzone.base_url.concat(Constants.API_SYSTEMS, params);
-        var response = await AsyncRequest.jsonGetRequest(url);
-
-        var errors = response["errors"];
-        if(errors)
-        {
-            this.logError("Failed to load systems of "+this.name+": (statusCode: "+response["statusCode"]+") - "+response["errors"]);
+        var systems_relations = await this.get_systems();
+        if(systems_relations == undefined)
             return false;
-        }
-        var body = response["body"];
-        var systems_relations = JSON.parse(body)["systems"];
+
         this.systems = [];
         let systemsCount = 0;
         for (let index = 0; index < systems_relations.length; index++) {
@@ -54,5 +46,31 @@ class Device {
 
         return true;
     }
+
+    async update_systems() {
+        var systems_relations = await this.get_systems();
+        if(systems_relations == undefined)
+            return false;
+
+        // TODO
+
+        return true;
+    }
+
+    async get_systems() {
+        var params = "/?device_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
+        var url = this.airzone.base_url.concat(Constants.API_SYSTEMS, params);
+        var response = await AsyncRequest.jsonGetRequest(url);
+
+        var errors = response["errors"];
+        if(errors)
+        {
+            this.logError("Failed to load systems of "+this.name+": (statusCode: "+response["statusCode"]+") - "+response["errors"]);
+            return false;
+        }
+        var body = response["body"];
+        var systems_relations = JSON.parse(body)["systems"];
+        return systems_relations;
+    }    
 }
 module.exports = Device;

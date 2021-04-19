@@ -47,6 +47,32 @@ class System {
     }
 
     async load_zones() {
+
+        var zones_relations = await this.get_zones();
+        if(zones_relations == undefined)
+            return false;
+
+        this.zones = [];        
+        for (let index = 0; index < zones_relations.length; index++) {
+            var zoneData = zones_relations[index];
+            var zone = new Zone(this.airzone, zoneData);
+            this.zones[index] = zone;            
+        }
+
+        return true;
+    }
+
+    async update_zones() {
+        var zones_relations = await this.get_zones();
+        if(zones_relations == undefined)
+            return false;
+
+        // TODO
+
+        return true;
+    }
+
+    async get_zones() {
         var params = "/?system_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
         var url = this.airzone.base_url.concat(Constants.API_ZONES, params);
         var response = await AsyncRequest.jsonGetRequest(url);
@@ -59,14 +85,7 @@ class System {
         }
         var body = response["body"];
         var zones_relations = JSON.parse(body)["zones"];
-        this.zones = [];        
-        for (let index = 0; index < zones_relations.length; index++) {
-            var zoneData = zones_relations[index];
-            var zone = new Zone(this.airzone, zoneData);
-            this.zones[index] = zone;            
-        }
-
-        return true;
+        return zones_relations;
     }
 }
 module.exports = System;

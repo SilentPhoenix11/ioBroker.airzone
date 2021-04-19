@@ -25,7 +25,17 @@ class AirzoneCloud {
             return false;
 
         return true;
-    }   
+    }
+    
+    async update() {
+        if(!await this.login())
+            return false;
+
+        if(!await this.update_devices())
+            return false;
+
+        return true;
+    }
     
     async login() {
         this.logInfo("Login at AirzoneCloud ");
@@ -53,18 +63,9 @@ class AirzoneCloud {
     }
 
     async load_devices() {
-        var params = "/?format=json&user_email="+this.username.toLowerCase()+"&user_token="+this.token;
-        var url = this.base_url.concat(Constants.API_DEVICE_RELATIONS, params);
-        var response = await AsyncRequest.jsonGetRequest(url);
-
-        var errors = response["errors"];
-        if(errors)
-        {
-            this.logError("Failed to load device relations: (statusCode: "+response["statusCode"]+") - "+response["errors"]);
+        var device_relations = await this.get_devices();
+        if(device_relations == undefined)
             return false;
-        }
-        var body = response["body"];
-        var device_relations = JSON.parse(body)["device_relations"];
         
         this.devices = [];
         let deviceCount = 0;
@@ -77,8 +78,33 @@ class AirzoneCloud {
                 deviceCount++;
             }
         }
+        return true;
+    }
+
+    async update_devices() {
+        var device_relations = await this.get_devices();
+        if(device_relations == undefined)
+            return false;
+
+        // TODO
 
         return true;
+    }
+
+    async get_devices() {
+        var params = "/?format=json&user_email="+this.username.toLowerCase()+"&user_token="+this.token;
+        var url = this.base_url.concat(Constants.API_DEVICE_RELATIONS, params);        
+        var response = await AsyncRequest.jsonGetRequest(url);
+
+        var errors = response["errors"];
+        if(errors)
+        {
+            this.logError("Failed to load device relations: (statusCode: "+response["statusCode"]+") - "+response["errors"]);
+            return undefined;
+        }
+        var body = response["body"];
+        var device_relations = JSON.parse(body)["device_relations"];
+        return device_relations;
     }
 
     logInfo(msg) {
