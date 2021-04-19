@@ -1,6 +1,6 @@
 'use strict';
 
-const AsyncRequest = require('./asyncRequest');
+const AsyncRequest = require('../Utils/asyncRequest');
 const Constants = require('./Constants')
 
 // const Device = require('./Device')
