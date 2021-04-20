@@ -27,7 +27,7 @@ class System {
             type: 'state',
             common: {
                 name: 'System_'+this.name,
-                type: 'device',
+                type: 'object',
                 read: true,
                 write: false,
             },

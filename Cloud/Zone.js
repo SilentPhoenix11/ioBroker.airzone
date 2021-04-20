@@ -26,7 +26,7 @@ class Zone {
             type: 'state',
             common: {
                 name: 'Zone_'+this.name,
-                type: 'device',
+                type: 'object',
                 read: true,
                 write: false,
             },

@@ -22,7 +22,7 @@ class Device {
             type: 'state',
             common: {
                 name: 'Device_'+this.name,
-                type: 'device',
+                type: 'object',
                 read: true,
                 write: false,
             },
