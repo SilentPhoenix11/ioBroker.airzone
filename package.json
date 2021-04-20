@@ -1,5 +1,5 @@
 {
-   "name":"iobroker.Airzone",
+   "name":"iobroker.airzone",
    "version":"0.0.1",
    "description":"Airzone cloud adapter for ioBroker",
    "author":{
