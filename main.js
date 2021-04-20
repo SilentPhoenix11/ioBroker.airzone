@@ -1,6 +1,6 @@
 'use strict';
 
-const adaptername = "airzone"
+const adaptername = "Airzone"
 
 const utils = require('@iobroker/adapter-core');
 const AirzoneCloud = require("./Cloud/AirzoneCloud");
