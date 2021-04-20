@@ -10,27 +10,9 @@ class Device {
         this.airzone = airzone;    
     }
 
-    async updateData(deviceData)
-    {                
-        this.status = deviceData["status"];
-        await this.adapter.updatePropertyValue(this.path, 'status', this.status);
-
-        this.mac = deviceData["mac"];
-        await this.adapter.updatePropertyValue(this.path, 'mac', this.mac);
-
-        this.pin = deviceData["pin"];
-        await this.adapter.updatePropertyValue(this.path, 'pin', this.pin);
-
-        this.target_temperature = deviceData["consign"];
-        await this.adapter.updatePropertyValue(this.path, 'target_temperature', this.target_temperature);
-    }
-
-    async update(deviceData) {
-        
-        await this.updateData(deviceData);
-        await this.update_systems();        
-    }
-
+    /**
+     * Initialize the device with the data from the airzone cloud
+     */
     async init(deviceData) {
         this.id = deviceData["id"];
         this.name = deviceData["name"];
@@ -62,6 +44,36 @@ class Device {
         return true;
     }
 
+    /**
+     * Synchronized the device data from airzone into the iobroker data points
+     */
+    async updateData(deviceData)
+    {                
+        this.status = deviceData["status"];
+        await this.adapter.updatePropertyValue(this.path, 'status', this.status);
+
+        this.mac = deviceData["mac"];
+        await this.adapter.updatePropertyValue(this.path, 'mac', this.mac);
+
+        this.pin = deviceData["pin"];
+        await this.adapter.updatePropertyValue(this.path, 'pin', this.pin);
+
+        this.target_temperature = deviceData["consign"];
+        await this.adapter.updatePropertyValue(this.path, 'target_temperature', this.target_temperature);
+    }
+
+    /**
+     * Synchronized the device data from airzone into the iobroker data points and call update for all sub systems
+     */
+    async update(deviceData) {
+        
+        await this.updateData(deviceData);
+        await this.update_systems();        
+    }
+
+    /**
+     * Load and initialize the systems of this device from airzone cloud
+     */
     async load_systems(path) {
         var systems_relations = await this.get_systems();
         if(systems_relations == undefined)
@@ -82,6 +94,9 @@ class Device {
         return true;
     }
 
+    /**
+     * Update systems with the current system data from airzone cloud
+     */
     async update_systems() {
         var systems_relations = await this.get_systems();
         if(systems_relations == undefined)
@@ -102,6 +117,9 @@ class Device {
         return true;
     }
 
+    /**
+     * Web request to get the systems of this system
+     */
     async get_systems() {
         var params = "/?device_id="+this.id+"&format=json&user_email="+this.airzone.username.toLowerCase()+"&user_token="+this.airzone.token;
         var url = this.airzone.base_url.concat(Constants.API_SYSTEMS, params);
@@ -110,7 +128,7 @@ class Device {
         var errors = response["errors"];
         if(errors)
         {
-            this.logError("Failed to load systems of "+this.name+": (statusCode: "+response["statusCode"]+") - "+response["errors"]);
+            this.airzone.logError("Failed to load systems of "+this.name+": (statusCode: "+response["statusCode"]+") - "+response["errors"]);
             return false;
         }
         var body = response["body"];

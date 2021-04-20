@@ -7,18 +7,21 @@ class Zone {
         this.airzone = airzone;                       
     }
 
+    /**
+     * Initialize the zone with the data from the airzone cloud
+     */
     async init(path, zoneData) {
-        this.id = zoneData["id"];
-        this.name = zoneData["name"];
+        this.id = zoneData['id'];
+        this.name = zoneData['name'];
 
-        this.device_id = zoneData["device_id"];
-        this.system_number = zoneData["system_number"];
-        this.zone_number = zoneData["zone_number"];
+        this.device_id = zoneData['device_id'];
+        this.system_number = zoneData['system_number'];
+        this.zone_number = zoneData['zone_number'];
 
-        this.min_temp = zoneData["lower_conf_limit"];
-        this.max_temp = zoneData["upper_conf_limit"]; 
+        this.min_temp = zoneData['lower_conf_limit'];
+        this.max_temp = zoneData['upper_conf_limit']; 
         
-        this.path = path+"."+this.name;
+        this.path = path+'.'+this.name;
         await this.adapter.setObjectNotExistsAsync(this.path, {
             type: 'state',
             common: {
@@ -42,31 +45,95 @@ class Zone {
         await this.adapter.createProperty(this.path, 'mode', 'string', true, false);
         await this.adapter.createProperty(this.path, 'mode_description', 'string', true, false);
 
+        // Register callbacks to react on value changes
+        this.adapter.subscribeState(this.path+'.target_temperature', this, this.reactToTargetTemperatureChange);
+        this.adapter.subscribeState(this.path+'.is_on', this, this.reactToIsOnChange);
+
         await this.updateData(zoneData);
     }
 
+    /**
+     * Synchronized the zone data from airzone into the iobroker data points
+     */
     async updateData(zoneData)
     { 
-        this.current_temperature = zoneData["temp"];
+        this.current_temperature = zoneData['temp'];
         await this.adapter.updatePropertyValue(this.path, 'current_temperature', this.current_temperature);
 
-        this.current_humidity = zoneData["humidity"];
+        this.current_humidity = zoneData['humidity'];
         await this.adapter.updatePropertyValue(this.path, 'current_humidity', this.current_humidity);
 
-        this.target_temperature = zoneData["consign"];
+        this.target_temperature = zoneData['consign'];
         await this.adapter.updatePropertyValue(this.path, 'target_temperature', this.target_temperature);
-        
-        this.is_on = zoneData["state"] == "1";
-        await this.adapter.updatePropertyValue(this.path, 'is_on', this.is_on);
-                        
-        this.mode_raw = zoneData["mode"];
+                                       
+        this.mode_raw = zoneData['mode'];
         await this.adapter.updatePropertyValue(this.path, 'mode_raw', this.mode_raw);
 
-        this.mode = Constants.MODES_CONVERTER[this.mode_raw]["name"];
+        this.mode = Constants.MODES_CONVERTER[this.mode_raw]['name'];
         await this.adapter.updatePropertyValue(this.path, 'mode', this.mode);
 
-        this.mode_description = Constants.MODES_CONVERTER[this.mode_raw]["description"];        
+        this.mode_description = Constants.MODES_CONVERTER[this.mode_raw]['description'];        
         await this.adapter.updatePropertyValue(this.path, 'mode_description', this.mode_description);
+
+        this.is_on = zoneData['state'] == '1' && this.mode_raw > 0;
+        await this.adapter.updatePropertyValue(this.path, 'is_on', this.is_on);
     }    
+
+    /**
+     * Is called when the state of target_temperature was changed
+     */
+    async reactToTargetTemperatureChange(self, id, state) {
+        var temperature = state.val;
+        if(self.min_temp != undefined && temperature < self.min_temp)
+            temperature = self.min_temp;
+        if(self.max_temp != undefined && temperature > self.max_temp)
+            temperature = self.max_temp;
+
+        await self.sendEvent('consign', temperature);
+    }
+
+    /**
+     * Is called when the state of is_on was changed
+     */
+    async reactToIsOnChange(self, id, state) {        
+        if(self.mode_raw < 1)
+            return;
+
+        if(state.val)
+            await self.turn_on();
+        else
+            await self.turn_off();
+    }
+
+    /**
+     * Send event to the airzone cloud
+     */
+    async sendEvent(option, value) {
+        var payload = {
+            'event': {
+                'cgi': 'modzona',
+                'device_id': this.device_id,
+                'system_number': this.system_number,
+                'zone_number': this.zone_number,
+                'option': option,
+                'value': value,
+            }
+        };
+        await this.airzone.sendEvent(payload);
+    }
+
+    /**
+     * Turn zone on
+     */
+    async turn_on() {
+        await this.sendEvent('state', 1);
+    }
+
+    /**
+     * Turn zone off
+     */
+     async turn_off() {
+        await this.sendEvent('state', 0);
+    }
 }
 module.exports = Zone;

@@ -125,5 +125,13 @@ class AirzoneCloud {
         log.error(msg);
     }
 
+    async sendEvent(payload) {
+        if(!await this.login())
+            return;
+
+        var params = "/?format=json&user_email="+this.username.toLowerCase()+"&user_token="+this.token;
+        var url = this.base_url.concat(Constants.API_EVENTS, params);
+        await AsyncRequest.jsonPostRequest(url, JSON.stringify(payload));
+    }
 }
 module.exports = AirzoneCloud;
