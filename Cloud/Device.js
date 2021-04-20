@@ -3,31 +3,66 @@ const AsyncRequest = require('../Utils/asyncRequest');
 const Constants = require('./Constants');
 
 class Device {
-    constructor(airzone, deviceData)
+    
+    constructor(adapter, airzone)
     {       
-        this.airzone = airzone;
+        this.adapter = adapter;
+        this.airzone = airzone;    
+    }
+
+    async updateData(deviceData)
+    {                
+        this.status = deviceData["status"];
+        await this.adapter.updatePropertyValue(this.path, 'status', this.status);
+
+        this.mac = deviceData["mac"];
+        await this.adapter.updatePropertyValue(this.path, 'mac', this.mac);
+
+        this.pin = deviceData["pin"];
+        await this.adapter.updatePropertyValue(this.path, 'pin', this.pin);
+
+        this.target_temperature = deviceData["consign"];
+        await this.adapter.updatePropertyValue(this.path, 'target_temperature', this.target_temperature);
+    }
+
+    async update(deviceData) {
+        
+        await this.updateData(deviceData);
+        await this.update_systems();        
+    }
+
+    async init(deviceData) {
         this.id = deviceData["id"];
         this.name = deviceData["name"];
         
-        this.updateData(deviceData);
-    }
+        this.path = this.name;
+        await this.adapter.setObjectNotExistsAsync(this.path, {
+            type: 'state',
+            common: {
+                name: 'Device_'+this.name,
+                type: 'device',
+                read: true,
+                write: false,
+            },
+            native: {},
+        });               
 
-    updateData(deviceData)
-    {                
-        this.status = deviceData["status"];
-        this.mac = deviceData["mac"];
-        this.pin = deviceData["pin"];
-        this.target_temperature = deviceData["consign"];
-    }
+        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id);
+        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name);
+        await this.adapter.createProperty(this.path, 'status', 'string', true, false);
+        await this.adapter.createProperty(this.path, 'mac', 'string', true, false);
+        await this.adapter.createProperty(this.path, 'pin', 'string', true, false);
+        await this.adapter.createProperty(this.path, 'target_temperature', 'number', 0, 100, '°C', true, true);
+        
+        await this.updateData(deviceData);
 
-    async init() {
-        if(!await this.load_systems())
+        if(!await this.load_systems(this.path))
             return false;
 
         return true;
     }
 
-    async load_systems() {
+    async load_systems(path) {
         var systems_relations = await this.get_systems();
         if(systems_relations == undefined)
             return false;
@@ -36,8 +71,8 @@ class Device {
         let systemsCount = 0;
         for (let index = 0; index < systems_relations.length; index++) {
             var systemData = systems_relations[index];
-            var system = new System(this.airzone, systemData);
-            if(await system.init())
+            var system = new System(this.adapter, this.airzone);
+            if(await system.init(path, systemData))
             {
                 this.systems[systemsCount] = system;
                 systemsCount++;
@@ -52,7 +87,17 @@ class Device {
         if(systems_relations == undefined)
             return false;
 
-        // TODO
+        for (let index = 0; index < systems_relations.length; index++) {
+            var systemData = systems_relations[index];
+            var sId = systemData["id"];
+            
+            for(let i = 0;i<this.systems.length;i++) {
+                if(this.systems[i].id == sId) {
+                    await this.systems[i].update(systemData);
+                    break;
+                }
+            }                        
+        }
 
         return true;
     }

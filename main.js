@@ -29,11 +29,21 @@ class Template extends utils.Adapter {
     
     async onReady() {
         // Initialize your adapter here
-        this.session = new AirzoneCloud(this.log, this.config.username, this.config.password, this.config.base_url);
+        this.session = new AirzoneCloud(this, this.config.username, this.config.password, this.config.base_url);
         await this.session.init();
-        this.log.info("................")
-        //await this.session.init();
+        this.log.info("init done...")
 
+        if(this.config.sync_time > 0) {
+        this.callReadAirzone = setInterval(
+            (function(self) {         //Self-executing func which takes 'this' as self
+                return async function() {   //Return a function in the context of 'self'
+                    self.log.info('update from airzone ...');
+                    await self.session.update();
+                    self.log.info("update done...")
+                }
+            })(this),
+             this.config.sync_time * 1000);
+        }
         /*
         For every state in the system there has to be also an object of type state
         Here a simple template for a boolean variable named "testVariable"
@@ -89,6 +99,11 @@ class Template extends utils.Adapter {
      */
     onUnload(callback) {
         try {
+            if (this.callReadAirzone !== null) {
+                clearInterval(this.callReadActuator);
+                adapter.log.debug('update timer cleared');
+            }
+            
             // Here you must clear all timeouts or intervals that may still be active
             // clearTimeout(timeout1);
             // clearTimeout(timeout2);
@@ -150,6 +165,44 @@ class Template extends utils.Adapter {
     //         }
     //     }
     // }
+
+    async createProperty(_path, _name, _type, _read, _write){
+        await this.setObjectNotExistsAsync(_path+"."+_name, {
+            type: 'state',
+            common: {
+                name: _name,
+                type: _type,
+                read: _read,
+                write: _write,
+            },
+            native: {},
+        });
+    }
+
+    async createProperty(_path, _name, _type, _min, _max, _unit, _read, _write){
+        await this.setObjectNotExistsAsync(_path+"."+_name, {
+            type: 'state',
+            common: {
+                name: _name,
+                type: _type,
+                read: _read,
+                write: _write,
+                min : _min,
+                max : _max,
+                unit : _unit
+            },
+            native: {},
+        });
+    }
+
+    async updatePropertyValue(_path, _name, _value) {
+        await this.setStateAsync(_path+"."+_name, { val: _value, ack: true } );
+    }
+
+    async createPropertyAndInit(_path, _name, _type, _read, _write, _value){
+        await this.createProperty(_path, _name, _type, _read, _write);
+        await this.updatePropertyValue(_path, _name, _value);
+    }
 
 }
 

@@ -7,10 +7,12 @@ const Device = require('./Device')
 // Allow to connect to AirzoneCloud API
 
 let log;
+let adapter;
 class AirzoneCloud {
-    constructor(l, username, password, base_url)
+    constructor(a, username, password, base_url)
     {
-        log = l;
+        adapter = a;
+        log = a.log;        
         this.username = username;
         this.password = password;
         this.base_url = base_url;        
@@ -38,8 +40,6 @@ class AirzoneCloud {
     }
     
     async login() {
-        this.logInfo("Login at AirzoneCloud ");
-
         var url = this.base_url.concat(Constants.API_LOGIN);
         const data = JSON.stringify({"email":this.username, "password":this.password});        
         var response = await AsyncRequest.jsonPostRequest(url, data);
@@ -57,8 +57,7 @@ class AirzoneCloud {
         var body = response["body"];   
         var user = JSON.parse(body)["user"];  
         this.token = user["authentication_token"];        
-                                    
-        this.logInfo("AirzoneCloud login successful");
+        
         return true;
     }
 
@@ -71,8 +70,8 @@ class AirzoneCloud {
         let deviceCount = 0;
         for (let index = 0; index < device_relations.length; index++) {
             var deviceData = device_relations[index]["device"];
-            var device = new Device(this, deviceData);
-            if(await device.init())
+            var device = new Device(adapter, this);
+            if(await device.init(deviceData))
             {
                 this.devices[deviceCount] = device;
                 deviceCount++;
@@ -83,11 +82,22 @@ class AirzoneCloud {
 
     async update_devices() {
         var device_relations = await this.get_devices();
+
         if(device_relations == undefined)
             return false;
+        
+        for (let index = 0; index < device_relations.length; index++) {
+            var deviceData = device_relations[index]["device"];
 
-        // TODO
-
+            var dId = deviceData["id"];
+            
+            for(let i = 0;i<this.devices.length;i++) {
+                if(this.devices[i].id == dId) {
+                    await this.devices[i].update(deviceData);
+                    break;
+                }
+            }                        
+        }
         return true;
     }
 
