@@ -3,8 +3,15 @@
    "version":"1.0.0",
    "description":"Airzone cloud adapter for ioBroker",
    "author":{
-      "name":"Schemmer Christian"
+      "name":"Christian Schemmer"
+	  "email":"christian.silentphoenix11@gmail.com"
    },
+   "contributors": [
+	{
+		"name":"Christian Schemmer",
+		"email":"christian.silentphoenix11@gmail.com"
+	}	
+   ]
    "homepage":"https://github.com/SilentPhoenix11/ioBroker.airzone",
    "license":"MIT",
    "keywords":[

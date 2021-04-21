@@ -18,7 +18,7 @@
          "de":"Adapter zur Anbindung der Airzone Cloud."
       },
       "authors":[
-         "Christian Schemmer"
+         "Christian Schemmer <christian.silentphoenix11@gmail.com>"
       ],
       "keywords":[
          "ioBroker",
