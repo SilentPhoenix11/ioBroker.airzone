@@ -1,6 +1,6 @@
 {
    "name":"iobroker.airzone",
-   "version":"0.0.1",
+   "version":"1.0.0",
    "description":"Airzone cloud adapter for ioBroker",
    "author":{
       "name":"Schemmer Christian"

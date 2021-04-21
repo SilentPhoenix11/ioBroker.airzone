@@ -1,9 +1,9 @@
 {
    "common":{
       "name":"airzone",
-      "version":"0.0.1",
+      "version":"1.0.0",
       "news":{
-         "0.0.1":{
+         "1.0.0":{
             "en":"initial release",
             "de":"Erstveröffentlichung"
          }
@@ -35,6 +35,8 @@
       "loglevel":"info",
       "mode":"daemon",
       "type":"climate-control",
+	  "connectionType":"cloud",
+	  "dataSource":"poll",
       "compact":true,
       "materialize":true,
       "materializeTab":true,
