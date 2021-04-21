@@ -2,6 +2,11 @@
 https://airzonecloud.com/
 
 ##  Changelog
+### 1.0.0
+* First release
+* Regular updating the values of device, system and zone.
+* Control of mode and eco for device
+* Control of is_on and target temperature per zone
 
 ## License
 MIT License<br>
