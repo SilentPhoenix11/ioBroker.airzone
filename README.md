@@ -3,6 +3,11 @@ https://airzonecloud.com/
 
 Control and monitor airzone devices with ioBroker.
 
+![Number of Installations](http://iobroker.live/badges/airzone-installed.svg) ![Number of Installations](http://iobroker.live/badges/airzone-stable.svg) [![NPM version](https://img.shields.io/npm/v/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
+[![Downloads](https://img.shields.io/npm/dm/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
+
+[![NPM](https://nodei.co/npm/iobroker.airzone.png?downloads=true)](https://nodei.co/npm/iobroker.airzone/)
+
 ## Changelog
 ### 1.0.0
 * (SilentPhoenix11) First release
