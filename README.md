@@ -1,7 +1,7 @@
 ![Logo](admin/Airzone.png)
 https://airzonecloud.com/
 
-##  Changelog
+## Changelog
 ### 1.0.0
 * First release
 * Regular updating the values of device, system and zone.
