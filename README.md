@@ -1,4 +1,4 @@
-![Logo](admin/Airzone.png)
+![Logo](admin/Airzone.png)<br>
 https://airzonecloud.com/
 
 Control and monitor airzone devices with ioBroker.
@@ -7,6 +7,8 @@ Control and monitor airzone devices with ioBroker.
 [![Downloads](https://img.shields.io/npm/dm/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
 
 [![NPM](https://nodei.co/npm/iobroker.airzone.png?downloads=true)](https://nodei.co/npm/iobroker.airzone/)
+
+**Tests:** [![Travis-CI](https://travis-ci.com/SilentPhoenix11/ioBroker.airzone.svg?branch=master)](https://travis-ci.com/github/SilentPhoenix11/ioBroker.airzone)
 
 ## Changelog
 ### 1.0.0
