@@ -3,12 +3,18 @@ https://airzonecloud.com/
 
 Control and monitor airzone devices with ioBroker.
 
-![Number of Installations](http://iobroker.live/badges/airzone-installed.svg) ![Number of Installations](http://iobroker.live/badges/airzone-stable.svg) [![NPM version](https://img.shields.io/npm/v/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
+[![NPM version](http://img.shields.io/npm/v/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.airzone.svg)](https://www.npmjs.com/package/iobroker.airzone)
+[![Stable](http://iobroker.live/badges/airzone-stable.svg)](http://iobroker.live/badges/airzone-stable.svg)
+[![installed](http://iobroker.live/badges/airzone-installed.svg)](http://iobroker.live/badges/airzone-installed.svg)
+[![Dependency Status](https://img.shields.io/david/SilentPhoenix11/iobroker.airzone.svg)](https://david-dm.org/SilentPhoenix11/iobroker.airzone)
+[![Known Vulnerabilities](https://snyk.io/test/github/SilentPhoenix11/ioBroker.airzone/badge.svg)](https://snyk.io/test/github/SilentPhoenix11/ioBroker.airzone)
+[![Build Status](http://img.shields.io/travis/SilentPhoenix11/ioBroker.airzone.svg)](https://travis-ci.org/SilentPhoenix11/ioBroker.airzone)
+[![Travis-CI](https://travis-ci.com/SilentPhoenix11/ioBroker.airzone.svg?branch=master)](https://travis-ci.com/github/SilentPhoenix11/ioBroker.airzone)
 
 [![NPM](https://nodei.co/npm/iobroker.airzone.png?downloads=true)](https://nodei.co/npm/iobroker.airzone/)
 
-**Tests:** [![Travis-CI](https://travis-ci.com/SilentPhoenix11/ioBroker.airzone.svg?branch=master)](https://travis-ci.com/github/SilentPhoenix11/ioBroker.airzone)
+**Tests:** 
 
 ## Changelog
 ### 1.0.0
