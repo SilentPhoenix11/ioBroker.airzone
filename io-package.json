@@ -10,8 +10,8 @@
       },
       "title":"Airzone Cloud",
       "titleLang":{
-         "en":"Airzone Cloud ioBroker adapter",
-         "de":"Airzone Cloud ioBroker Adapter"
+         "en":"Airzone Cloud",
+         "de":"Airzone Cloud"
       },
       "desc":{
          "en":"Adapter for connecting the Airzone Cloud.",
