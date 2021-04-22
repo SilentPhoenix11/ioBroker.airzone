@@ -6,12 +6,7 @@
       "name":"Christian Schemmer",
       "email":"christian.silentphoenix11@gmail.com"
    },
-   "contributors": [
-   {
-        "name":"Christian Schemmer",
-        "email":"christian.silentphoenix11@gmail.com"
-   }
-   ],
+   "contributors": [],
    "homepage":"https://github.com/SilentPhoenix11/ioBroker.airzone",
    "license":"MIT",
    "keywords":[
@@ -20,20 +15,30 @@
       "airzone cloud",
       "Smart Home",
       "home automation"
-   ],
+   ],   
    "repository":{
       "type":"git",
       "url":"https://github.com/SilentPhoenix11/ioBroker.airzone"
    },
+   "engines": {
+      "node": ">=12.0.0"
+    },
    "dependencies":{
-      "@iobroker/adapter-core": "^2.4.0"
+      "@iobroker/adapter-core": "^2.4.0",
+      "request": "^2.88.2",
+      "util":"^0.12.3"
    },
    "devDependencies":{
-
    },
    "main":"main.js",
    "scripts":{
-
+      "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
+      "test:package": "mocha test/package --exit",
+      "test:unit": "mocha test/unit --exit",
+      "test:integration": "mocha test/integration --exit",
+      "test": "npm run test:js && npm run test:package",
+      "check": "tsc --noEmit -p tsconfig.check.json",
+      "lint": "eslint"
    },
    "bugs":{
       "url":"https://github.com/SilentPhoenix11/ioBroker.airzone/issues"
