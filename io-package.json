@@ -1,11 +1,15 @@
 {
    "common":{
       "name":"airzone",
-      "version":"1.0.0",
+      "version":"1.0.1",
       "news":{
          "1.0.0":{
             "en":"initial release",
             "de":"Erstveröffentlichung"
+         },
+         "1.0.1":{
+            "en":"Various corrections in the project structure",
+            "de":"Diverse Korrekturen in Projektstruktur"
          }
       },
       "title":"Airzone Cloud",
