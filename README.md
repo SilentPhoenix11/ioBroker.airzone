@@ -16,14 +16,14 @@ Control and monitor airzone devices with ioBroker.
 **Tests:** 
 
 ## Changelog
+### 1.0.1
+* (SilentPhoenix11) Various corrections in the project structure
+
 ### 1.0.0
 * (SilentPhoenix11) First release
 * Regular updating the values of device, system and zone.
 * Control of mode and eco for device
 * Control of is_on and target temperature per zone
-
-### 1.0.1
-* (SilentPhoenix11) Various corrections in the project structure
 
 ## License
 MIT License<br>
