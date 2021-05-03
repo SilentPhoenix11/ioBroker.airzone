@@ -21,7 +21,7 @@
       "url":"https://github.com/SilentPhoenix11/ioBroker.airzone"
    },
    "engines": {
-      "node": ">=10.17.0"
+      "node": ">=12.0.0"
     },
    "dependencies":{
       "@iobroker/adapter-core": "^2.4.0",
