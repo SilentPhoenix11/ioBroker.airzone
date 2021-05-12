@@ -33,13 +33,15 @@ class Template extends utils.Adapter {
         await this.session.init();        
 
         if(this.config.sync_time > 0) {
-        this.callReadAirzone = setInterval(
+        
+            var syncTime = Math.max(this.config.sync_time, 15);
+
+            this.callReadAirzone = setInterval(
             (function(self) {         //Self-executing func which takes 'this' as self
                 return async function() {   //Return a function in the context of 'self'
                     await self.session.update();
                 }
-            })(this),
-             this.config.sync_time * 1000);
+            })(this), syncTime * 1000);
         }
     }
 

@@ -108,6 +108,11 @@ class System {
     async update(systemData) {
         
         await this.updateData(systemData);
+
+        // Ask an update to the airzone hardware (airzonecloud don't autopull data like current temperature)
+        // The update should be available in airzonecloud after 3 to 5 secs in average
+        await this.askSystemInfo();
+
         await this.update_zones();        
     }
 
@@ -135,6 +140,7 @@ class System {
      * Update zones with the current zone data from airzone cloud
      */
     async update_zones() {
+                       
         var zones_relations = await this.get_zones();
         if(zones_relations == undefined)
             return false;
@@ -206,6 +212,22 @@ class System {
                 'system_number': this.system_number,
                 'option': option,
                 'value': value,
+            }
+        };
+        await this.airzone.sendEvent(payload);
+    }
+
+    /**
+     * Ask an update to the airzone hardware (airzonecloud don't autopull data)
+     */
+    async askSystemInfo() {
+        var payload = {
+            'event': {
+                'cgi': 'infosistema2',
+                'device_id': this.device_id,
+                'system_number': this.system_number,
+                'option': null,
+                'value': null,
             }
         };
         await this.airzone.sendEvent(payload);

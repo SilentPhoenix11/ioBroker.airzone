@@ -62,7 +62,7 @@
    },
    "native":{
       "base_url":"https://airzonecloud.com",
-      "sync_time":12
+      "sync_time":30
    },
    "objects":[],
    "instanceObjects":[]
