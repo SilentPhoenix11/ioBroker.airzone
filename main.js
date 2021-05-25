@@ -34,7 +34,7 @@ class Template extends utils.Adapter {
         this.initialized = true;
 
         if(this.config.sync_time > 0) {        
-            update();
+            this.update();
         }
     }
 
@@ -53,7 +53,7 @@ class Template extends utils.Adapter {
                     }
 
                     if(self.initialized)
-                        update();
+                        self.update();
                 }
             })(this), syncTime * 1000);
     }
