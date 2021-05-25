@@ -23,7 +23,7 @@ class Zone {
         
         this.path = path+'.'+this.name;
         await this.adapter.setObjectNotExistsAsync(this.path, {
-            type: 'state',
+            type: 'device',
             common: {
                 name: 'Zone_'+this.name,
                 type: 'object',
@@ -33,17 +33,17 @@ class Zone {
             native: {},
         });
 
-        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id);
-        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name);
-        await this.adapter.createPropertyAndInit(this.path, 'min_temp', 'number', true, false, this.min_temp);
-        await this.adapter.createPropertyAndInit(this.path, 'max_temp', 'number', true, false, this.max_temp);
-        await this.adapter.createProperty(this.path, 'current_temperature', 'number', 0, 100, '°C', true, false);
-        await this.adapter.createProperty(this.path, 'current_humidity', 'number', 0, 100, '%', true, false);
-        await this.adapter.createProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, '°C', true, true);
-        await this.adapter.createProperty(this.path, 'is_on', 'boolean', true, false);
-        await this.adapter.createProperty(this.path, 'mode_raw', 'number', true, false);
-        await this.adapter.createProperty(this.path, 'mode', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'mode_description', 'string', true, false);
+        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id, 'text');
+        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name, 'text');
+        await this.adapter.createPropertyAndInit(this.path, 'min_temp', 'number', true, false, this.min_temp, 'value.min');
+        await this.adapter.createPropertyAndInit(this.path, 'max_temp', 'number', true, false, this.max_temp, 'value.max');
+        await this.adapter.createProperty(this.path, 'current_temperature', 'number', 0, 100, '°C', true, false, 'value.temperature');
+        await this.adapter.createProperty(this.path, 'current_humidity', 'number', 0, 100, '%', true, false, 'value.humidity');
+        await this.adapter.createProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, '°C', true, true, 'state');
+        await this.adapter.createProperty(this.path, 'is_on', 'boolean', true, false, 'switch.power');
+        await this.adapter.createProperty(this.path, 'mode_raw', 'number', true, false, 'value');
+        await this.adapter.createProperty(this.path, 'mode', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'mode_description', 'string', true, false, 'text');
 
         // Register callbacks to react on value changes
         this.adapter.subscribeState(this.path+'.target_temperature', this, this.reactToTargetTemperatureChange);

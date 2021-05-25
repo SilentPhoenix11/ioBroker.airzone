@@ -31,18 +31,31 @@ class Template extends utils.Adapter {
         // Initialize your adapter here
         this.session = new AirzoneCloud(this, this.config.username, this.config.password, this.config.base_url);
         await this.session.init();        
+        this.initialized = true;
 
-        if(this.config.sync_time > 0) {
-        
-            var syncTime = Math.max(this.config.sync_time, 15);
+        if(this.config.sync_time > 0) {        
+            update();
+        }
+    }
 
-            this.callReadAirzone = setInterval(
+    update() {
+        var syncTime = Math.max(this.config.sync_time, 15);
+
+        setTimeout(
             (function(self) {         //Self-executing func which takes 'this' as self
                 return async function() {   //Return a function in the context of 'self'
-                    await self.session.update();
+                    if(!self.initialized)
+                        return;
+                    try {
+                        await self.session.update();
+                    } catch (e) {
+                        adapter.log.error('error during update '+e);
+                    }
+
+                    if(self.initialized)
+                        update();
                 }
             })(this), syncTime * 1000);
-        }
     }
 
     /**
@@ -50,16 +63,8 @@ class Template extends utils.Adapter {
      * @param {() => void} callback
      */
     onUnload(callback) {
-        try {
-            if (this.callReadAirzone !== null) {
-                clearInterval(this.callReadActuator);
-                adapter.log.debug('update timer cleared');
-            }
-            
-            callback();
-        } catch (e) {
-            callback();
-        }
+        this.initialized = false;
+        callback();
     }
     
     /**
@@ -81,7 +86,7 @@ class Template extends utils.Adapter {
         }
     }
 
-    async createProperty(_path, _name, _type, _read, _write){
+    async createProperty(_path, _name, _type, _read, _write, _role){
         await this.setObjectNotExistsAsync(_path+"."+_name, {
             type: 'state',
             common: {
@@ -89,19 +94,21 @@ class Template extends utils.Adapter {
                 type: _type,
                 read: _read,
                 write: _write,
+                role: _role,
             },
             native: {},
         });
     }
 
-    async createProperty(_path, _name, _type, _min, _max, _unit, _read, _write){
+    async createProperty(_path, _name, _type, _min, _max, _unit, _read, _write, _role){
         await this.setObjectNotExistsAsync(_path+"."+_name, {
             type: 'state',
             common: {
                 name: _name,
                 type: _type,
-                read: _read,
+                read: _read,                
                 write: _write,
+                role: _role,
                 min : _min,
                 max : _max,
                 unit : _unit
@@ -114,8 +121,8 @@ class Template extends utils.Adapter {
         await this.setStateAsync(_path+"."+_name, { val: _value, ack: true } );
     }
 
-    async createPropertyAndInit(_path, _name, _type, _read, _write, _value){
-        await this.createProperty(_path, _name, _type, _read, _write);
+    async createPropertyAndInit(_path, _name, _type, _read, _write, _value, _role){
+        await this.createProperty(_path, _name, _type, _read, _write, _role);
         await this.updatePropertyValue(_path, _name, _value);
     }
     

@@ -19,7 +19,7 @@ class Device {
         
         this.path = this.name;
         await this.adapter.setObjectNotExistsAsync(this.path, {
-            type: 'state',
+            type: 'device',
             common: {
                 name: 'Device_'+this.name,
                 type: 'object',
@@ -29,12 +29,12 @@ class Device {
             native: {},
         });               
 
-        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id);
-        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name);
-        await this.adapter.createProperty(this.path, 'status', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'mac', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'pin', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'target_temperature', 'number', 0, 100, '°C', true, true);
+        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id, 'text');
+        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name, 'text');
+        await this.adapter.createProperty(this.path, 'status', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'mac', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'pin', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'target_temperature', 'number', 0, 100, '°C', true, true, 'state');
         
         await this.updateData(deviceData);
 

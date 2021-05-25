@@ -24,7 +24,7 @@ class System {
         
         this.path = path+"."+this.name;
         await this.adapter.setObjectNotExistsAsync(this.path, {
-            type: 'state',
+            type: 'device',
             common: {
                 name: 'System_'+this.name,
                 type: 'object',
@@ -34,24 +34,24 @@ class System {
             native: {},
         });
 
-        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id);
-        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name);
-        await this.adapter.createPropertyAndInit(this.path, 'min_limit', 'string', true, false, this.min_limit);
-        await this.adapter.createPropertyAndInit(this.path, 'max_limit', 'string', true, false, this.max_limit);
-        await this.adapter.createProperty(this.path, 'has_velocity', 'boolean', true, false);
-        await this.adapter.createProperty(this.path, 'velocity_raw', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'velocity', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'velocity_description', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'has_airflow', 'boolean', true, false);
-        await this.adapter.createProperty(this.path, 'airflow_raw', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'airflow', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'airflow_description', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'mode_raw', 'string', true, true);
-        await this.adapter.createProperty(this.path, 'mode', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'mode_description', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'eco_raw', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'eco', 'string', true, false);
-        await this.adapter.createProperty(this.path, 'eco_description', 'string', true, false);
+        await this.adapter.createPropertyAndInit(this.path, 'id', 'string', true, false, this.id, 'text');
+        await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name, 'text');
+        await this.adapter.createPropertyAndInit(this.path, 'min_limit', 'string', true, false, this.min_limit, 'value.min');
+        await this.adapter.createPropertyAndInit(this.path, 'max_limit', 'string', true, false, this.max_limit, 'value.max');
+        await this.adapter.createProperty(this.path, 'has_velocity', 'boolean', true, false, 'indicator');
+        await this.adapter.createProperty(this.path, 'velocity_raw', 'string', true, false, 'value');
+        await this.adapter.createProperty(this.path, 'velocity', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'velocity_description', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'has_airflow', 'boolean', true, false, 'indicator');
+        await this.adapter.createProperty(this.path, 'airflow_raw', 'string', true, false, 'value');
+        await this.adapter.createProperty(this.path, 'airflow', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'airflow_description', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'mode_raw', 'string', true, true, 'state');
+        await this.adapter.createProperty(this.path, 'mode', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'mode_description', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'eco_raw', 'string', true, true, 'state');
+        await this.adapter.createProperty(this.path, 'eco', 'string', true, false, 'text');
+        await this.adapter.createProperty(this.path, 'eco_description', 'string', true, false, 'text');
 
         this.adapter.subscribeState(this.path+'.mode_raw', this, this.reactToModeRawChange);
         this.adapter.subscribeState(this.path+'.eco_raw', this, this.reactToEcoRawChange);

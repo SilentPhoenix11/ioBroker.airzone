@@ -4,22 +4,54 @@
       "version":"1.0.1",
       "news":{
          "1.0.0":{
-            "en":"initial release",
-            "de":"Erstveröffentlichung"
+            "en": "initial release",
+            "de": "Erstveröffentlichung",
+            "ru": "Первый выпуск",
+            "pt": "lançamento inicial",
+            "nl": "Eerste uitgave",
+            "fr": "Première version",
+            "it": "Versione iniziale",
+            "es": "Versión inicial",
+            "pl": "Pierwsze wydanie",
+            "zh-cn": "初始发行"
          },
          "1.0.1":{
-            "en":"Various corrections in the project structure",
-            "de":"Diverse Korrekturen in Projektstruktur"
+            "en": "Various corrections in the project structure",
+            "de": "Verschiedene Korrekturen in der Projektstruktur",
+            "ru": "Различные исправления в структуре проекта",
+            "pt": "Várias correções na estrutura do projeto",
+            "nl": "Diverse correcties in de projectstructuur",
+            "fr": "Diverses corrections dans la structure du projet",
+            "it": "Varie correzioni nella struttura del progetto",
+            "es": "Varias correcciones en la estructura del proyecto",
+            "pl": "Różne poprawki w strukturze projektu",
+            "zh-cn": "项目结构中的各种更正"
          }
       },
       "title":"Airzone Cloud",
       "titleLang":{
-         "en":"Airzone Cloud",
-         "de":"Airzone Cloud"
+         "en": "Airzone Cloud",
+         "de": "Airzone Cloud",
+         "ru": "Облако Airzone",
+         "pt": "Airzone Cloud",
+         "nl": "Airzone Cloud",
+         "fr": "Nuage d'Airzone",
+         "it": "Airzone Cloud",
+         "es": "Nube de Airzone",
+         "pl": "Chmura Airzone",
+         "zh-cn": "空域云"
       },
       "desc":{
-         "en":"Adapter for connecting the Airzone Cloud.",
-         "de":"Adapter zur Anbindung der Airzone Cloud."
+         "en": "Adapter for connecting the Airzone Cloud.",
+         "de": "Adapter zum Anschließen der Airzone Cloud.",
+         "ru": "Адаптер для подключения Airzone Cloud.",
+         "pt": "Adaptador para conectar o Airzone Cloud.",
+         "nl": "Adapter voor het aansluiten van de Airzone Cloud.",
+         "fr": "Adaptateur pour connecter le Cloud Airzone.",
+         "it": "Adattatore per il collegamento dell'Airzone Cloud.",
+         "es": "Adaptador para conectar Airzone Cloud.",
+         "pl": "Adapter do podłączenia chmury Airzone.",
+         "zh-cn": "用于连接Airzone Cloud的适配器。"
       },
       "authors":[
          "Christian Schemmer <christian.silentphoenix11@gmail.com>"
@@ -43,17 +75,7 @@
 	   "compact":true,
       "connectionType":"cloud",
 	   "dataSource":"poll",      
-      "materialize":true,
-      "adminTab":{
-         "singleton":true,
-         "name":{
-            "en":"Airzone Cloud",
-            "de":"Airzone Cloud"
-         },
-         "link":"www.airzone.es/en/",
-         "fa-icon":"info"
-      },
-      "supportCustoms":true,
+      "materialize":true,      
       "dependencies":[
          {
             "js-controller":">=2.0.0"
@@ -61,9 +83,17 @@
       ]
    },
    "native":{
+      "username":"mail@me.com",
+      "password":"password",
       "base_url":"https://airzonecloud.com",
       "sync_time":30
    },
+   "encryptedNative": [
+       "password"
+   ],
+   "protectedNative": [
+       "password"
+   ],
    "objects":[],
    "instanceObjects":[]
 }
