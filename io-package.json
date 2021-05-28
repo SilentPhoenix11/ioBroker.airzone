@@ -83,8 +83,8 @@
       ]
    },
    "native":{
-      "username":"mail@me.com",
-      "password":"password",
+      "username":"",
+      "password":"",
       "base_url":"https://airzonecloud.com",
       "sync_time":30
    },
