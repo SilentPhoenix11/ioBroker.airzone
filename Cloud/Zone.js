@@ -37,9 +37,9 @@ class Zone {
         await this.adapter.createPropertyAndInit(this.path, 'name', 'string', true, false, this.name, 'text');
         await this.adapter.createPropertyAndInit(this.path, 'min_temp', 'number', true, false, this.min_temp, 'value.min');
         await this.adapter.createPropertyAndInit(this.path, 'max_temp', 'number', true, false, this.max_temp, 'value.max');
-        await this.adapter.createProperty(this.path, 'current_temperature', 'number', 0, 100, '°C', true, false, 'value.temperature');
-        await this.adapter.createProperty(this.path, 'current_humidity', 'number', 0, 100, '%', true, false, 'value.humidity');
-        await this.adapter.createProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, '°C', true, true, 'state');
+        await this.adapter.createUnitProperty(this.path, 'current_temperature', 'number', 0, 100, '°C', true, false, 'value.temperature');
+        await this.adapter.createUnitProperty(this.path, 'current_humidity', 'number', 0, 100, '%', true, false, 'value.humidity');
+        await this.adapter.createUnitProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, '°C', true, true, 'state');
         await this.adapter.createProperty(this.path, 'is_on', 'boolean', true, false, 'switch.power');
         await this.adapter.createProperty(this.path, 'mode_raw', 'number', true, false, 'value');
         await this.adapter.createProperty(this.path, 'mode', 'string', true, false, 'text');

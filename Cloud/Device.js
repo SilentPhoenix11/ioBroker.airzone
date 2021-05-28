@@ -34,7 +34,7 @@ class Device {
         await this.adapter.createProperty(this.path, 'status', 'string', true, false, 'text');
         await this.adapter.createProperty(this.path, 'mac', 'string', true, false, 'text');
         await this.adapter.createProperty(this.path, 'pin', 'string', true, false, 'text');
-        await this.adapter.createProperty(this.path, 'target_temperature', 'number', 0, 100, '°C', true, true, 'state');
+        await this.adapter.createUnitProperty(this.path, 'target_temperature', 'number', 0, 100, '°C', true, true, 'state');
         
         await this.updateData(deviceData);
 

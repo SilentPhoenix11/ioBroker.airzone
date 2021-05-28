@@ -100,7 +100,7 @@ class Template extends utils.Adapter {
         });
     }
 
-    async createProperty(_path, _name, _type, _min, _max, _unit, _read, _write, _role){
+    async createUnitProperty(_path, _name, _type, _min, _max, _unit, _read, _write, _role){
         await this.setObjectNotExistsAsync(_path+"."+_name, {
             type: 'state',
             common: {
