@@ -16,6 +16,9 @@ Control and monitor airzone devices with ioBroker.
 **Tests:** 
 
 ## Changelog
+### 1.0.3
+* (SilentPhoenix11) Fix of "SyntaxError: Unexpected end of JSON input" when calling "askSystemInfo"
+
 ### 1.0.2
 * (SilentPhoenix11) Corrections after code review by Apollon77
 

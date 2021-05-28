@@ -1,7 +1,7 @@
 {
    "common":{
       "name":"airzone",
-      "version":"1.0.2",
+      "version":"1.0.3",
       "news":{
          "1.0.0":{
             "en": "initial release",
@@ -26,7 +26,7 @@
             "es": "Varias correcciones en la estructura del proyecto",
             "pl": "Różne poprawki w strukturze projektu",
             "zh-cn": "项目结构中的各种更正"
-         }
+         },
 		 "1.0.2":{
             "en": "Corrections after code review by Apollon77",
 			"de": "Korrekturen nach Codeüberprüfung durch Apollon77",
@@ -38,7 +38,19 @@
 			"es": "Correcciones después de la revisión del código por Apollon77",
 			"pl": "Poprawki po przeglądzie kodu przez Apollon77",
 			"zh-cn": "经过Apollon77代码审查后的更正"
-         }
+         },
+		 "1.0.3":{
+			"en": "Fix of \"SyntaxError: Unexpected end of JSON input\" when calling \"askSystemInfo\"",
+			"de": "Korrektur von \"SyntaxError: Unerwartetes Ende der JSON-Eingabe\" beim Aufruf von \"askSystemInfo\"",
+			"ru": "Исправление «SyntaxError: неожиданный конец ввода JSON» при вызове «askSystemInfo»",
+			"pt": "Correção de \"SyntaxError: fim inesperado da entrada JSON\" ao chamar \"askSystemInfo\"",
+			"nl": "Reparatie van \"SyntaxError: onverwacht einde van JSON-invoer\" bij het aanroepen van \"askSystemInfo\"",
+			"fr": "Correction de \"SyntaxError: Fin inattendue de l'entrée JSON\" lors de l'appel de \"askSystemInfo\"",
+			"it": "Correzione di \"SyntaxError: fine imprevista dell'input JSON\" durante la chiamata a \"askSystemInfo\"",
+			"es": "Corrección de \"SyntaxError: final inesperado de la entrada JSON\" al llamar a \"askSystemInfo\"",
+			"pl": "Naprawiono błąd „SyntaxError: Niespodziewany koniec danych wejściowych JSON” podczas wywoływania „askSystemInfo”",
+			"zh-cn": "修复了在调用“ askSystemInfo”时“ SyntaxError：JSON输入意外结束”的问题"
+		 },
       },
       "title":"Airzone Cloud",
       "titleLang":{
