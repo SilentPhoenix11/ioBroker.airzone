@@ -49,7 +49,7 @@ class Template extends utils.Adapter {
                     try {
                         await self.session.update();
                     } catch (e) {
-                        adapter.log.error('error during update '+e);
+                        self.log.error('error during update '+e+'\r\n'+e.stack);
                     }
 
                     if(self.initialized)

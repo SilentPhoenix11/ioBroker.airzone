@@ -23,7 +23,8 @@ class AsyncRequest {
         }
         else
         {
-            var errorMsg = JSON.parse(response.body)["errors"];
+            var body = response.body;
+            var errorMsg = JSON.parse(body)["errors"];
             if(errorMsg)
                 result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
             else
@@ -48,7 +49,8 @@ class AsyncRequest {
         }
         else
         {
-            var errorMsg = JSON.parse(response.body)["errors"];
+            var body = response.body;
+            var errorMsg = JSON.parse(body)["errors"];
             if(errorMsg)
                 result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
             else
