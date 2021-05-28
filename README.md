@@ -16,6 +16,9 @@ Control and monitor airzone devices with ioBroker.
 **Tests:** 
 
 ## Changelog
+### 1.0.2
+* (SilentPhoenix11) Corrections after code review by Apollon77
+
 ### 1.0.1
 * (SilentPhoenix11) Various corrections in the project structure
 

@@ -1,7 +1,7 @@
 {
    "common":{
       "name":"airzone",
-      "version":"1.0.1",
+      "version":"1.0.2",
       "news":{
          "1.0.0":{
             "en": "initial release",
@@ -26,6 +26,18 @@
             "es": "Varias correcciones en la estructura del proyecto",
             "pl": "Różne poprawki w strukturze projektu",
             "zh-cn": "项目结构中的各种更正"
+         }
+		 "1.0.2":{
+            "en": "Corrections after code review by Apollon77",
+			"de": "Korrekturen nach Codeüberprüfung durch Apollon77",
+			"ru": "Исправления после проверки кода Apollon77",
+			"pt": "Correções após revisão de código por Apollon77",
+			"nl": "Correcties na codebeoordeling door Apollon77",
+			"fr": "Corrections après révision du code par Apollon77",
+			"it": "Correzioni dopo la revisione del codice da parte di Apollon77",
+			"es": "Correcciones después de la revisión del código por Apollon77",
+			"pl": "Poprawki po przeglądzie kodu przez Apollon77",
+			"zh-cn": "经过Apollon77代码审查后的更正"
          }
       },
       "title":"Airzone Cloud",
