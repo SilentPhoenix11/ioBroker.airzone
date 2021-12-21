@@ -3,7 +3,7 @@
 const adaptername = "airzone"
 
 const utils = require('@iobroker/adapter-core');
-const AirzoneCloud = require("./Cloud/AirzoneCloud");
+const AirzoneLocalApi = require("./LocalApi/AirzoneLocalApi");
 
 
 class Template extends utils.Adapter {
@@ -29,8 +29,17 @@ class Template extends utils.Adapter {
      */    
     async onReady() {
         // Initialize your adapter here
-        this.session = new AirzoneCloud(this, this.config.username, this.config.password, this.config.base_url);
-        await this.session.init();        
+        try
+        {
+            this.log.info('Init Airzone local api...');
+            this.session = new AirzoneLocalApi(this, this.config.local_ip);
+            await this.session.init(parseInt(this.config.system_id));
+            this.log.info('Init Airzone local api succeeded.');
+        } 
+        catch (e) 
+        {
+            this.log.error('Init Airzone local api failed: '+e+'\r\n'+e.stack);
+        }
         this.initialized = true;
 
         if(this.config.sync_time > 0) {        
@@ -39,7 +48,7 @@ class Template extends utils.Adapter {
     }
 
     update() {
-        var syncTime = Math.max(this.config.sync_time, 15);
+        var syncTime = Math.max(this.config.sync_time, 1);
 
         setTimeout(
             (function(self) {         //Self-executing func which takes 'this' as self

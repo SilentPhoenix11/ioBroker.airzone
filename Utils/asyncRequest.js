@@ -34,6 +34,37 @@ class AsyncRequest {
         return JSON.parse(result);        
     }
 
+    static async jsonPutRequest(url, data) {
+        
+        const response = await asyncRequest({
+            method: 'PUT',
+            uri: url,
+            headers: {
+                'Content-Type': 'application/json'
+            },            
+            body: data
+        });
+
+        var result;
+        
+        if(response.error)
+        {
+            result = JSON.stringify({statusCode:response.statusCode,errors:error});
+        }
+        else
+        {
+            var body = response.body;
+            var errorMsg = JSON.parse(body)["errors"];
+            if(errorMsg)
+                result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
+            else
+                result = JSON.stringify({statusCode:response.statusCode,body:response.body});
+        }        
+
+        return JSON.parse(result);        
+    }
+
+
     static async jsonGetRequest(url) {
         
         const response = await asyncRequest({

@@ -67,34 +67,30 @@
 
         <div class="row">
             <div class="col s12 m4 l2">
-                <img src="Airzone.png" class="logo" style="width: 150px;">
+                <img src="Airzone.png" class="logo" style="width: 198px;">
             </div>            
         </div>
 
         <div class="row">
-			<div class="col s6 input-field">
-                <input placeholder="mail@me.com" type="text" class="value" id="username"/>
-                <label for="username" class="translate">Username</label>
-            </div>
-			
-			<div class="col s6 input-field">
-                <input type="password" class="value" id="password" />
-                <label for="password" class="translate">Password</label>
-            </div>
+			<div class="input-field col s12 m4 l3">
+                <input placeholder="192.168.178.1" type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$" class="value validate" id="local_ip">
+                <label data-error="invalid format" data-success="ok" for="local_ip" class="translate">Local IP</label>
+            </div>		
         </div>
-        <div class="row">		
-			<div class="col s6 input-field">
-                <input placeholder="https://airzonecloud.com" type="text" class="value" id="base_url" />
-                <label for="base_url" class="translate">Base url</label><span class="helper-text translate">(default is https://airzonecloud.com)</span>
-            </div>
-
+        <div class="row">
             <div class="input-field col s12 m4 l3">
-                <input placeholder="30" name="synchronization" type="number" id="sync_time" class="value validate" />
-                <label data-error="numbers only" data-success="ok" class="translate active" for="sync_time" class="translate">Sync time</label><span class="helper-text translate">s (default is 30 s, minimum is 15 s)</span>
+                <input placeholder="1" type="number" class="value validate" id="system_id" min="1"/>
+                <label data-error="numbers only" data-success="ok" class="translate active" for="system_id" class="translate">System Id</label>
+                <span class="helper-text translate">(default is 1)</span>
             </div>
-			
         </div>
-
+        <div class="row">
+            <div class="input-field col s12 m4 l3">
+                <input placeholder="5" type="number" id="sync_time" class="value validate" min="1"/>
+                <label data-error="numbers only" data-success="ok" class="translate active" for="sync_time" class="translate">Sync time</label>
+                <span class="helper-text translate">(default is 5 s, minimum is 1 s)</span>
+            </div>
+        </div>
     </div>
 
 </body>

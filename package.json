@@ -1,7 +1,7 @@
 {
    "name":"iobroker.airzone",
-   "version":"1.0.4",
-   "description":"Airzone cloud adapter for ioBroker",
+   "version":"2.0.0",
+   "description":"Airzone local api integration for ioBroker",
    "author":{
       "name":"Christian Schemmer",
       "email":"christian.silentphoenix11@gmail.com"

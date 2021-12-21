@@ -1,7 +1,7 @@
 {
    "common":{
       "name":"airzone",
-      "version":"1.0.4",
+      "version":"2.0.0",
       "news":{
          "1.0.0":{
             "en": "initial release",
@@ -62,32 +62,44 @@
 			"es": "Pequeñas correcciones",
 			"pl": "Małe poprawki",
 			"zh-cn": "小修正"
+		 },
+		 "2.0.0":{
+			"en": "Using the local API",
+			"de": "Verwendung der local API",
+			"ru": "Использование локального API",
+			"pt": "Utilização do API local",
+			"nl": "Gebruik van de lokale API",
+			"fr": "Utilisation de l'API locale",
+			"it": "Uso dell'API locale",
+			"es": "Uso de la API local",
+			"pl": "Korzystanie z lokalnego API",
+			"zh-cn": "使用本地API"
 		 }
       },
-      "title":"Airzone Cloud",
+      "title":"Airzone Local API",
       "titleLang":{
-         "en": "Airzone Cloud",
-         "de": "Airzone Cloud",
-         "ru": "Облако Airzone",
-         "pt": "Airzone Cloud",
-         "nl": "Airzone Cloud",
-         "fr": "Nuage d'Airzone",
-         "it": "Airzone Cloud",
-         "es": "Nube de Airzone",
-         "pl": "Chmura Airzone",
-         "zh-cn": "空域云"
+         "en": "Airzone local API",
+         "de": "Airzone lokale API",
+         "ru": "Airzone local API",
+         "pt": "Airzone local API",
+         "nl": "Airzone lokale API",
+         "fr": "Airzone local API",
+         "it": "API locale di Airzone",
+         "es": "API local de Airzone",
+         "pl": "Lokalne API strefy lotniczej",
+         "zh-cn": "Airzone本地API"
       },
       "desc":{
-         "en": "Adapter for connecting the Airzone Cloud.",
-         "de": "Adapter zum Anschließen der Airzone Cloud.",
-         "ru": "Адаптер для подключения Airzone Cloud.",
-         "pt": "Adaptador para conectar o Airzone Cloud.",
-         "nl": "Adapter voor het aansluiten van de Airzone Cloud.",
-         "fr": "Adaptateur pour connecter le Cloud Airzone.",
-         "it": "Adattatore per il collegamento dell'Airzone Cloud.",
-         "es": "Adaptador para conectar Airzone Cloud.",
-         "pl": "Adapter do podłączenia chmury Airzone.",
-         "zh-cn": "用于连接Airzone Cloud的适配器。"
+         "en": "Allows the integration of an Airzone system.",
+         "de": "Ermöglicht die Integration eines Airzone Systems.",
+         "ru": "Позволяет интегрировать систему Airzone.",
+         "pt": "Permite a integração de um sistema de Zona Aérea.",
+         "nl": "Maakt de integratie van een Airzone-systeem mogelijk.",
+         "fr": "Permet d'intégrer un système Airzone.",
+         "it": "Permette l'integrazione di un sistema Airzone.",
+         "es": "Permite la integración de un sistema Airzone.",
+         "pl": "Umożliwia integrację systemu Airzone.",
+         "zh-cn": "实现了Airzone系统的整合。"
       },
       "authors":[
          "Christian Schemmer <christian.silentphoenix11@gmail.com>"
@@ -109,7 +121,7 @@
       "mode":"daemon",
       "type":"climate-control",
 	   "compact":true,
-      "connectionType":"cloud",
+      "connectionType":"local",
 	   "dataSource":"poll",      
       "materialize":true,      
       "dependencies":[
@@ -119,17 +131,12 @@
       ]
    },
    "native":{
-      "username":"",
-      "password":"",
-      "base_url":"https://airzonecloud.com",
-      "sync_time":30
+      "local_ip":"192.168.XXX.XXX",
+      "system_id":1,
+      "sync_time":5      
    },
-   "encryptedNative": [
-       "password"
-   ],
-   "protectedNative": [
-       "password"
-   ],
+   "encryptedNative": [],
+   "protectedNative": [],
    "objects":[],
    "instanceObjects":[]
 }
