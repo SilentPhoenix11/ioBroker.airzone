@@ -37,9 +37,14 @@ class AirzoneLocalApi {
     }
 
     async getZoneState() {
+        if(this.system == undefined)
+            return undefined;
+        
         var url = "http://"+this.local_ip+":3000/api/v1/hvac";
+        var systemId = this.system.id;
+        this.logInfo("SystemId: "+systemId);
         //const data = JSON.stringify({"systemID":this.system?.id, "ZoneID":0});
-        var data = '{\"systemID\":'+this.system?.id+', \"ZoneID\":0}';
+        var data = '{\"systemID\":'+systemId+', \"ZoneID\":0}';
         var response = await AsyncRequest.jsonPostRequest(url, data);
 
         var errors = response["errors"];
