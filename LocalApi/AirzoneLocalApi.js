@@ -62,11 +62,16 @@ class AirzoneLocalApi {
 
     async sendUpdate(zoneid, key, value) 
     {
+        if(this.system == undefined)
+            return false;
+
         try
         {
             var url = "http://"+this.local_ip+":3000/api/v1/hvac";
-            var payload = '{\"systemID\":'+this.system?.id+', \"ZoneID\":'+zoneid+', \"'+key+'\":'+value+'}';
-            var response = await AsyncRequest.jsonPutRequest(url, payload);
+            var systemId = this.system.id;
+            var data = '{\"systemID\":'+systemId+', \"ZoneID\":'+zoneid+', \"'+key+'\":'+value+'}';
+            this.logInfo(data);
+            var response = await AsyncRequest.jsonPutRequest(url, data);
             var errors = response["errors"];
             if(errors)
             {
@@ -80,6 +85,7 @@ class AirzoneLocalApi {
         catch (e) {
             this.logError('error during sendUpdate '+e+'\r\n'+e.stack);
         }
+        return false;
     }
 }
 module.exports = AirzoneLocalApi;
