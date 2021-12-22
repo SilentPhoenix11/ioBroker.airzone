@@ -11,6 +11,9 @@ Control and monitor airzone devices with ioBroker.
 [![Build Status](https://travis-ci.com/SilentPhoenix11/ioBroker.airzone.svg?branch=master)](https://travis-ci.com/github/SilentPhoenix11/ioBroker.airzone)
 
 ## Changelog
+### 2.0.3
+* (SilentPhoenix11) Small fixes
+
 ### 2.0.2
 * (SilentPhoenix11) Small fixes
 
