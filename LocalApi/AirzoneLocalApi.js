@@ -45,6 +45,7 @@ class AirzoneLocalApi {
         this.logInfo("SystemId: "+systemId);
         //const data = JSON.stringify({"systemID":this.system?.id, "ZoneID":0});
         var data = '{\"systemID\":'+systemId+', \"ZoneID\":0}';
+        this.logInfo(data);
         var response = await AsyncRequest.jsonPostRequest(url, data);
 
         var errors = response["errors"];
