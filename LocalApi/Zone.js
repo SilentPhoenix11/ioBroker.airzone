@@ -42,7 +42,7 @@ class Zone {
         await this.adapter.createProperty(this.path, 'is_on', 'boolean', true, false, 'switch.power');
         await this.adapter.createUnitProperty(this.path, 'current_temperature', 'number', 0, 100, unitUnit, true, false, 'value.temperature');
         await this.adapter.createUnitProperty(this.path, 'current_humidity', 'number', 0, 100, '%', true, false, 'value.humidity');
-        await this.adapter.createUnitProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, unitUnit, true, true, 'state');
+        await this.adapter.createUnitProperty(this.path, 'target_temperature', 'number', this.min_temp, this.max_temp, unitUnit, true, true, 'value.temperature');
         
         // Register callbacks to react on value changes
         this.adapter.subscribeState(this.path+'.target_temperature', this, this.reactToTargetTemperatureChange);

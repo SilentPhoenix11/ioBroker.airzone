@@ -26,7 +26,7 @@ class System {
             native: {},
         });
 
-        await this.adapter.createProperty(this.path, 'mode_raw', 'string', true, true, 'state');
+        await this.adapter.createProperty(this.path, 'mode_raw', 'number', true, true, 'state');
         await this.adapter.createProperty(this.path, 'mode', 'string', true, false, 'text');
 
         this.adapter.subscribeState(this.path+'.mode_raw', this, this.reactToModeRawChange);
