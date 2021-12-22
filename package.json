@@ -1,6 +1,6 @@
 {
    "name":"iobroker.airzone",
-   "version":"2.0.1",
+   "version":"2.0.2",
    "description":"Airzone local api integration for ioBroker",
    "author":{
       "name":"Christian Schemmer",
