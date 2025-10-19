@@ -12,3 +12,6 @@ Thumbs.db
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
 /settings/secrets/AUTO_MERGE_TOKEN
+
+#ignore .commitinfo created by ioBroker release script
+.commitinfo
