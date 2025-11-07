@@ -154,6 +154,7 @@
       "enabled":true,
       "readme":"https://github.com/SilentPhoenix11/ioBroker.airzone/blob/master/README.md",
       "loglevel":"info",
+      "tier": 2,
       "mode":"daemon",
       "type":"climate-control",
 	   "compact":true,
