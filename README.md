@@ -44,7 +44,7 @@ Control and monitor airzone devices with ioBroker.
 ## License
 MIT License<br>
 
-Copyright (c) 2021 Christian Schemmer <br>
+Copyright (c) 2021-2026 Christian Schemmer <br>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
