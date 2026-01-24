@@ -141,9 +141,7 @@
          "Christian Schemmer <christian.silentphoenix11@gmail.com>"
       ],
       "keywords":[
-         "ioBroker",
          "airzone",
-         "Smart Home",
          "home automation"
       ],
       "license":"MIT",
