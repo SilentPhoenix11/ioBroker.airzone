@@ -1,94 +1,137 @@
-const util = require('util');
-const request = require("request");
-const asyncRequest = util.promisify(request);
+'use strict';
+
+const axios = require('axios');
+
+// Create axios instance with default config for Airzone API
+const axiosInstance = axios.create({
+    timeout: 10000,
+    headers: {
+        'Content-Type': 'application/json'
+    }
+});
 
 class AsyncRequest {
 
+    /**
+     * Perform a POST request to the Airzone API
+     * @param {string} url - The URL to send the request to
+     * @param {object} data - The data to send (will be serialized to JSON)
+     * @returns {Promise<object>} - Response object with statusCode and body/errors
+     */
     static async jsonPostRequest(url, data) {
-        
-        const response = await asyncRequest({
-            method: 'POST',
-            uri: url,
-            headers: {
-                'Content-Type': 'application/json'
-            },            
-            body: data
-        });
+        try {
+            // Parse data if it's a string
+            const requestData = typeof data === 'string' ? JSON.parse(data) : data;
 
-        var result;
-        
-        if(response.error)
-        {
-            result = JSON.stringify({statusCode:response.statusCode,errors:error});
+            const response = await axiosInstance.post(url, requestData);
+
+            // Check for API-level errors in response
+            if (response.data && response.data.errors) {
+                return {
+                    statusCode: response.status,
+                    errors: response.data.errors
+                };
+            }
+
+            return {
+                statusCode: response.status,
+                body: JSON.stringify(response.data)
+            };
+        } catch (error) {
+            if (error.response) {
+                // Server responded with error status
+                const errorData = error.response.data;
+                return {
+                    statusCode: error.response.status,
+                    errors: errorData?.errors || errorData?.message || error.message
+                };
+            }
+            // Network error or timeout
+            return {
+                statusCode: 0,
+                errors: error.message
+            };
         }
-        else
-        {
-            var body = response.body;
-            var errorMsg = JSON.parse(body)["errors"];
-            if(errorMsg)
-                result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
-            else
-                result = JSON.stringify({statusCode:response.statusCode,body:response.body});
-        }        
-
-        return JSON.parse(result);        
     }
 
+    /**
+     * Perform a PUT request to the Airzone API
+     * @param {string} url - The URL to send the request to
+     * @param {object} data - The data to send (will be serialized to JSON)
+     * @returns {Promise<object>} - Response object with statusCode and body/errors
+     */
     static async jsonPutRequest(url, data) {
-        
-        const response = await asyncRequest({
-            method: 'PUT',
-            uri: url,
-            headers: {
-                'Content-Type': 'application/json'
-            },            
-            body: data
-        });
+        try {
+            // Parse data if it's a string
+            const requestData = typeof data === 'string' ? JSON.parse(data) : data;
 
-        var result;
-        
-        if(response.error)
-        {
-            result = JSON.stringify({statusCode:response.statusCode,errors:error});
+            const response = await axiosInstance.put(url, requestData);
+
+            // Check for API-level errors in response
+            if (response.data && response.data.errors) {
+                return {
+                    statusCode: response.status,
+                    errors: response.data.errors
+                };
+            }
+
+            return {
+                statusCode: response.status,
+                body: JSON.stringify(response.data)
+            };
+        } catch (error) {
+            if (error.response) {
+                // Server responded with error status
+                const errorData = error.response.data;
+                return {
+                    statusCode: error.response.status,
+                    errors: errorData?.errors || errorData?.message || error.message
+                };
+            }
+            // Network error or timeout
+            return {
+                statusCode: 0,
+                errors: error.message
+            };
         }
-        else
-        {
-            var body = response.body;
-            var errorMsg = JSON.parse(body)["errors"];
-            if(errorMsg)
-                result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
-            else
-                result = JSON.stringify({statusCode:response.statusCode,body:response.body});
-        }        
-
-        return JSON.parse(result);        
     }
 
-
+    /**
+     * Perform a GET request to the Airzone API
+     * @param {string} url - The URL to send the request to
+     * @returns {Promise<object>} - Response object with statusCode and body/errors
+     */
     static async jsonGetRequest(url) {
-        
-        const response = await asyncRequest({
-            method: 'GET',
-            uri: url
-        });
+        try {
+            const response = await axiosInstance.get(url);
 
-        var result;
-        
-        if(response.error)
-        {
-            result = JSON.stringify({statusCode:response.statusCode,errors:error});
+            // Check for API-level errors in response
+            if (response.data && response.data.errors) {
+                return {
+                    statusCode: response.status,
+                    errors: response.data.errors
+                };
+            }
+
+            return {
+                statusCode: response.status,
+                body: JSON.stringify(response.data)
+            };
+        } catch (error) {
+            if (error.response) {
+                // Server responded with error status
+                const errorData = error.response.data;
+                return {
+                    statusCode: error.response.status,
+                    errors: errorData?.errors || errorData?.message || error.message
+                };
+            }
+            // Network error or timeout
+            return {
+                statusCode: 0,
+                errors: error.message
+            };
         }
-        else
-        {
-            var body = response.body;
-            var errorMsg = JSON.parse(body)["errors"];
-            if(errorMsg)
-                result = JSON.stringify({statusCode:response.statusCode,errors:errorMsg});
-            else
-                result = JSON.stringify({statusCode:response.statusCode,body:response.body});
-        }        
-
-        return JSON.parse(result);        
     }
 }
 

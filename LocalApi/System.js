@@ -1,12 +1,11 @@
-const Zone = require('./Zone')
-const AsyncRequest = require('../Utils/asyncRequest');
+const Zone = require('./Zone');
 const Constants = require('./Constants');
 
 class System {
     constructor(adapter, localApi, id)
     {
         this.adapter = adapter;
-        this.localApi = localApi;                   
+        this.localApi = localApi;
         this.id = id;
     }
 
@@ -14,7 +13,7 @@ class System {
      * Initialize the system with the data from the airzone local api
      */
     async init() {
-        this.path = "System"+this.id;
+        this.path = 'System'+this.id;
         await this.adapter.setObjectNotExistsAsync(this.path, {
             type: 'device',
             common: {
@@ -30,8 +29,8 @@ class System {
         await this.adapter.createProperty(this.path, 'mode', 'string', true, false, 'text');
 
         this.adapter.subscribeState(this.path+'.mode_raw', this, this.reactToModeRawChange);
-        
-        var masterZone = await this.load_zones(this.path);
+
+        const masterZone = await this.load_zones(this.path);
         if(masterZone == undefined)
             return false;
 
@@ -44,24 +43,24 @@ class System {
      * Synchronized the system data from airzone into the iobroker data points
      */
     async updateData(masterZoneData)
-    {                               
+    {
         if(masterZoneData == undefined)
         {
-            this.localApi.logError("Missing master Zone");
+            this.localApi.logError('Missing master Zone');
             return;
-        }            
+        }
 
-        this.mode_raw = masterZoneData["mode"];
+        this.mode_raw = masterZoneData['mode'];
         await this.adapter.updatePropertyValue(this.path, 'mode_raw', this.mode_raw);
-        this.mode = Constants.MODES_CONVERTER[this.mode_raw]["name"];
+        this.mode = Constants.MODES_CONVERTER[this.mode_raw]['name'];
         await this.adapter.updatePropertyValue(this.path, 'mode', this.mode);
     }
-   
+
     /**
      * Synchronized the system data from airzone into the iobroker data points and call update for all sub zones
      */
-    async update() {            
-        var masterZoneData = await this.update_zones();        
+    async update() {
+        const masterZoneData = await this.update_zones();
 
         await this.updateData(masterZoneData);
     }
@@ -71,25 +70,25 @@ class System {
      */
     async load_zones(path) {
 
-        var zones_relations = await this.localApi.getZoneState();
+        const zones_relations = await this.localApi.getZoneState();
         if(zones_relations == undefined)
             return undefined;
 
-        var masterZoneData = undefined;
+        let masterZoneData = undefined;
         this.zones = [];
         for (let index = 0; index < zones_relations.length; index++) {
-            var zoneData = zones_relations[index];
-            var zone = new Zone(this.adapter, this.localApi);
-            await zone.init(path, zoneData)
-            this.zones[index] = zone;          
-            
-            if(zoneData.hasOwnProperty("mode"))
+            const zoneData = zones_relations[index];
+            const zone = new Zone(this.adapter, this.localApi);
+            await zone.init(path, zoneData);
+            this.zones[index] = zone;
+
+            if(zoneData.hasOwnProperty('mode'))
             {
                 masterZoneData = zoneData;
                 this.masterZoneId =  this.zones[index].id;
             }
         }
-        
+
         return masterZoneData;
     }
 
@@ -97,21 +96,21 @@ class System {
      * Update zones with the current zone data from airzone local api
      */
     async update_zones() {
-                       
-        var zones_relations = await this.localApi.getZoneState();
+
+        const zones_relations = await this.localApi.getZoneState();
         if(zones_relations == undefined)
             return undefined;
 
         if(this.zones == undefined)
             return undefined;
 
-        var masterZoneData = undefined;
+        let masterZoneData = undefined;
 
         for (let index = 0; index < zones_relations.length; index++) {
-            var zoneData = zones_relations[index];
-            var zId = zoneData["zoneID"];
-            
-            if(zoneData.hasOwnProperty("mode"))
+            const zoneData = zones_relations[index];
+            const zId = zoneData['zoneID'];
+
+            if(zoneData.hasOwnProperty('mode'))
                 masterZoneData = zoneData;
 
             for(let i = 0;i<this.zones.length;i++) {
@@ -119,24 +118,24 @@ class System {
                     await this.zones[i].updateData(zoneData);
                     break;
                 }
-            }                        
-        }        
+            }
+        }
 
         return masterZoneData;
     }
-    
+
     /**
      * Is called when the state of mode was changed
      */
     async reactToModeRawChange(self, id, state) {
-        
+
         if(state.val == 0)
         {
             self.zones.forEach(zone => {
                 zone.turn_off();
             });
         }
-        
+
         self.sendEvent('mode', state.val);
     }
 
@@ -144,7 +143,7 @@ class System {
      * Send event to the airzone local api
      */
     async sendEvent(option, value) {
-        await this.localApi.sendUpdate(this.masterZoneId, option, value)        
-    }    
+        await this.localApi.sendUpdate(this.masterZoneId, option, value);
+    }
 }
 module.exports = System;

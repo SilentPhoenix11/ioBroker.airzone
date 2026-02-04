@@ -1,8 +1,20 @@
 {
    "common":{
       "name":"airzone",
-      "version":"2.0.3",
+      "version":"3.0.0",
       "news":{
+         "3.0.0":{
+            "en": "Migrated from request to axios, Node.js 18+, added info.connection, extended API support",
+            "de": "Migration von request zu axios, Node.js 18+, info.connection hinzugefügt, erweiterte API-Unterstützung",
+            "ru": "Переход с request на axios, Node.js 18+, добавлен info.connection, расширенная поддержка API",
+            "pt": "Migração de request para axios, Node.js 18+, info.connection adicionado, suporte estendido à API",
+            "nl": "Migratie van request naar axios, Node.js 18+, info.connection toegevoegd, uitgebreide API-ondersteuning",
+            "fr": "Migration de request vers axios, Node.js 18+, info.connection ajouté, support API étendu",
+            "it": "Migrazione da request ad axios, Node.js 18+, aggiunto info.connection, supporto API esteso",
+            "es": "Migración de request a axios, Node.js 18+, info.connection añadido, soporte API extendido",
+            "pl": "Migracja z request do axios, Node.js 18+, dodano info.connection, rozszerzona obsługa API",
+            "zh-cn": "从request迁移到axios，Node.js 18+，添加info.connection，扩展API支持"
+         },
          "1.0.0":{
             "en": "initial release",
             "de": "Erstveröffentlichung",
@@ -156,13 +168,14 @@
       "loglevel":"info",
       "mode":"daemon",
       "type":"climate-control",
-	   "compact":true,
+      "compact":false,
       "connectionType":"local",
-	   "dataSource":"poll",      
-      "materialize":true,      
+      "dataSource":"poll",      
+      "materialize":true,
+      "nodeProcessParams": ["--insecure-http-parser"],
       "dependencies":[
          {
-            "js-controller":">=2.0.0"
+            "js-controller":">=5.0.0"
          }
       ]
    },
@@ -174,5 +187,27 @@
    "encryptedNative": [],
    "protectedNative": [],
    "objects":[],
-   "instanceObjects":[]
+   "instanceObjects":[
+      {
+         "_id": "info",
+         "type": "channel",
+         "common": {
+            "name": "Information"
+         },
+         "native": {}
+      },
+      {
+         "_id": "info.connection",
+         "type": "state",
+         "common": {
+            "role": "indicator.connected",
+            "name": "Device or service connected",
+            "type": "boolean",
+            "read": true,
+            "write": false,
+            "def": false
+         },
+         "native": {}
+      }
+   ]
 }
