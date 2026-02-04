@@ -1,33 +1,34 @@
 {
-   "name":"iobroker.airzone",
-   "version":"3.0.0",
-   "description":"Airzone local api integration for ioBroker",
-   "author":{
-      "name":"Christian Schemmer",
-      "email":"christian.silentphoenix11@gmail.com"
+   "name": "iobroker.airzone",
+   "version": "3.0.0",
+   "description": "Airzone local api integration for ioBroker",
+   "author": {
+      "name": "Christian Schemmer",
+      "email": "christian.silentphoenix11@gmail.com"
    },
    "contributors": [],
-   "homepage":"https://github.com/SilentPhoenix11/ioBroker.airzone",
-   "license":"MIT",
-   "keywords":[
+   "homepage": "https://github.com/SilentPhoenix11/ioBroker.airzone",
+   "license": "MIT",
+   "keywords": [
       "ioBroker",
       "airzone",
       "airzone cloud",
       "Smart Home",
       "home automation"
-   ],   
-   "repository":{
-      "type":"git",
-      "url":"https://github.com/SilentPhoenix11/ioBroker.airzone"
+   ],
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/SilentPhoenix11/ioBroker.airzone"
    },
    "engines": {
       "node": ">=18.0.0"
-    },
-   "dependencies":{
+   },
+   "dependencies": {
       "@iobroker/adapter-core": "^3.1.6",
       "axios": "^1.6.7"
    },
-   "devDependencies":{
+   "devDependencies": {
+      "@iobroker/adapter-dev": "^1.5.0",
       "@iobroker/testing": "^4.1.3",
       "@types/chai": "^4.3.11",
       "@types/chai-as-promised": "^7.1.8",
@@ -47,8 +48,8 @@
       "sinon-chai": "^3.7.0",
       "typescript": "^5.3.3"
    },
-   "main":"main.js",
-   "scripts":{
+   "main": "main.js",
+   "scripts": {
       "test:js": "mocha --config test/mocharc.custom.json \"{!(node_modules|test)/**/*.test.js,*.test.js,test/**/test!(PackageFiles|Startup).js}\"",
       "test:package": "mocha test/package --exit",
       "test:unit": "mocha test/unit --exit",
@@ -57,8 +58,8 @@
       "check": "tsc --noEmit -p tsconfig.check.json",
       "lint": "eslint"
    },
-   "bugs":{
-      "url":"https://github.com/SilentPhoenix11/ioBroker.airzone/issues"
+   "bugs": {
+      "url": "https://github.com/SilentPhoenix11/ioBroker.airzone/issues"
    },
-   "readmeFilename":"README.md"
+   "readmeFilename": "README.md"
 }
