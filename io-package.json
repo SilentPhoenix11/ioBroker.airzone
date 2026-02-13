@@ -160,7 +160,6 @@
       ],
       "license":"MIT",
       "platform":"Javascript/Node.js",
-      "main":"main.js",
       "icon":"AirzoneSmall.png",
       "extIcon":"https://raw.githubusercontent.com/SilentPhoenix11/ioBroker.airzone/master/admin/AirzoneSmall.png",
       "enabled":true,
