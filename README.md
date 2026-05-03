@@ -58,6 +58,8 @@ Control and monitor airzone devices with ioBroker.
 * Control of mode and eco for device
 * Control of is_on and target temperature per zone
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License<br>
 
