@@ -11,6 +11,9 @@ Control and monitor airzone devices with ioBroker.
 [![Build Status](https://travis-ci.com/SilentPhoenix11/ioBroker.airzone.svg?branch=master)](https://travis-ci.com/github/SilentPhoenix11/ioBroker.airzone)
 
 ## Changelog
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 3.0.0
 * (SilentPhoenix11) **BREAKING**: Requires Node.js >= 18 and js-controller >= 5.0.0
 * (SilentPhoenix11) Migrated from deprecated `request` to `axios` HTTP client
